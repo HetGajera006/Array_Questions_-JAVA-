@@ -33,12 +33,58 @@ public class ThreeSum {
         return new ArrayList<>(output);
     }
 
+    // Two pointers method...
+    // first fix one number from first index than use two pointer method to sum all three values..
+    
+    public List<List<Integer>> threesumTwoPointer(int nums[]){
+
+        int n=nums.length;
+        int target =0;
+
+        Set<List<Integer>> output = new HashSet<>();
+
+
+        for(int i=0;i<n;i++){
+            int firstPointer = i+1;
+            int secPointer = n-1;
+
+            while(firstPointer <= secPointer){
+                int sum = nums[i]+nums[firstPointer]+nums[secPointer];
+
+                if(sum==target){
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[firstPointer]);
+                    list.add(nums[secPointer]);
+                    Collections.sort(list);
+                    output.add(list);
+                    firstPointer++;
+                    secPointer--;
+                }
+
+                else if(sum < target){
+                    secPointer--;
+                }
+
+                else{
+                    firstPointer++;
+                }
+            }
+
+        }
+        return new ArrayList<>(output);
+    }
+
 
     public static void main(String[] args) {
         int array[] = {-1,0,1,2,-1,-4};
         ThreeSum Tsum = new ThreeSum();
-        List<List<Integer>> ans = Tsum.threesum(array);
-        System.out.println(ans);
+
+        // List<List<Integer>> ans = Tsum.threesum(array);
+        // System.out.println(ans);
+
+        List<List<Integer>> ans2 = Tsum.threesumTwoPointer(array);
+        System.out.println(ans2);
 
     }
 }
